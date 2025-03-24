@@ -2,7 +2,7 @@
 	"name": "fiftyone-snippets",
 	"displayName": "FiftyOne Snippets",
 	"description": "Snippets to use with the Voxel51 FiftyOne Python library.",
-	"version": "0.1.2",
+	"version": "0.1.3",
 	"publisher": "Burhan-Q",
     "repository": {
         "type": "git",

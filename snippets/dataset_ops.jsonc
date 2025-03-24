@@ -10,7 +10,7 @@
         "    name=\"${2:dataset_name}\",",
         "    persistent=${3|True,False|},",
         "    overwrite=${4|False,True|}$5,",
-        ")$0",
+        ")$0"
     ],
     "scope": "python",
     "description": "Create a new FiftyOne dataset"
@@ -21,7 +21,7 @@
         "body": [
             "${1:dataset} = foz.load_zoo_dataset(",
             "    name=\"${2:dataset_name}\", split=\"${3:train}\", dataset_dir=\"${4:~/fiftyone/zoo}\",",
-            ")$0",
+            ")$0"
         ],
         "scope": "python",
         "description": "Load a dataset from the FiftyOne Dataset Zoo"
@@ -42,7 +42,7 @@
             "    validate=${11|True,False|},",
             "    progress=${12:None},",
             "    num_samples=${13:None},",
-            ")$0",
+            ")$0"
         ],
         "scope": "python",
         "description": "Add samples to a FiftyOne dataset"
@@ -59,7 +59,7 @@
             "    expand_schema=${4|True,False|},",
             "    dynamic=${5|False,True|},",
             "    validate=${6|True,False|},",
-            ")$0",
+            ")$0"
         ],
         "scope": "python",
         "description": "Add a single sample with a label to a FiftyOne dataset"
@@ -73,7 +73,7 @@
             "    expand_schema=${4|True,False|},",
             "    dynamic=${5|False,True|},",
             "    validate=${6|True,False|},",
-            ")$0",
+            ")$0"
         ],
         "scope": "python",
         "description": "Add a single sample to a FiftyOne dataset"
