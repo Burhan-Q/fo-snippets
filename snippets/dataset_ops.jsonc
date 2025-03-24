@@ -1,0 +1,106 @@
+// Apache-2.0 License 
+// Author: Burhan-Q
+// https://github.com/Burhan-Q
+
+{
+    "Create Dataset": {
+    "prefix": "fo_dataset",
+    "body": [
+        "${1:dataset} = fo.Dataset(",
+        "    name=\"${2:dataset_name}\",",
+        "    persistent=${3|True,False|},",
+        "    overwrite=${4|False,True|}$5,",
+        ")$0",
+    ],
+    "scope": "python",
+    "description": "Create a new FiftyOne dataset"
+    },
+    
+    "Load Zoo Dataset": {
+        "prefix": "fo_load_zoo",
+        "body": [
+            "${1:dataset} = foz.load_zoo_dataset(",
+            "    name=\"${2:dataset_name}\", split=\"${3:train}\", dataset_dir=\"${4:~/fiftyone/zoo}\",",
+            ")$0",
+        ],
+        "scope": "python",
+        "description": "Load a dataset from the FiftyOne Dataset Zoo"
+    },
+
+    "Add Samples with Labels": {
+        "prefix": "fo_add_samples_w_labels",
+        "body": [
+            "samples = [",
+            "    fo.Sample(filepath=$1, label=fo.Label(label=\"${2:cat}\")$3),",
+            "    fo.Sample(filepath=$4, :label=fo.Label(label=\"${5:dog}\")$6),$7",
+            "]",
+            "",
+            "${8:dataset}.add_samples(",
+            "    samples=samples,",
+            "    expand_schema=${9|True,False|},",
+            "    dynamic=${10|False,True|},",
+            "    validate=${11|True,False|},",
+            "    progress=${12:None},",
+            "    num_samples=${13:None},",
+            ")$0",
+        ],
+        "scope": "python",
+        "description": "Add samples to a FiftyOne dataset"
+    },
+
+    "Add Sample with Label": {
+        "prefix": "fo_add_labled_sample",
+        "body": [
+            "${1:dataset}.add_sample(",
+            "    sample=fo.Sample(",
+            "        filepath=\"${2:path/to/image.jpg}\",",
+            "        label=fo.Label(label=\"${3:cat}\")",
+            "    ),",
+            "    expand_schema=${4|True,False|},",
+            "    dynamic=${5|False,True|},",
+            "    validate=${6|True,False|},",
+            ")$0",
+        ],
+        "scope": "python",
+        "description": "Add a single sample with a label to a FiftyOne dataset"
+    },
+
+    "Add Sample": {
+        "prefix": "fo_add_sample",
+        "body": [
+            "${1:dataset}.add_sample(",
+            "    sample=fo.Sample(filepath=\"${2:path/to/image.jpg}\"$3),",
+            "    expand_schema=${4|True,False|},",
+            "    dynamic=${5|False,True|},",
+            "    validate=${6|True,False|},",
+            ")$0",
+        ],
+        "scope": "python",
+        "description": "Add a single sample to a FiftyOne dataset"
+    },
+
+    "View Dataset": {
+        "prefix": "fo_launch",
+        "body": [
+            "session = fo.launch_app(",
+            "    dataset=${1:dataset},",
+            "    view=${2:None},",
+            "    sample_id=${3:None},",
+            "    group_id=${4:None},",
+            "    spaces=${5:None},",
+            "    color_scheme=${6:None},",
+            "    plots=${7:None},",
+            "    port=${8:None},",
+            "    address=${9:None},",
+            "    remote=${10|False,True|},",
+            "    browser=${11:None},",
+            "    height=${12:None},",
+            "    auto:=${13|True,False|},",
+            "    config=${14:None},",
+            ")",
+            "$0"
+        ],
+        "scope": "python",
+        "description": "Launch the FiftyOne app to view the dataset"
+    }
+}
