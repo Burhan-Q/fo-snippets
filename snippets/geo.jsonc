@@ -1,0 +1,41 @@
+// Apache-2.0 License 
+// Author: Burhan-Q
+// https://github.com/Burhan-Q
+
+{
+    "Geo Near": {
+        "prefix": "fo_geo_near",
+        "body": [
+        "${1:TIMES_SQUARE} = [${2:-73.9855}, ${3:40.7580}]",
+        "${4:dataset}.geo_near(",
+        "    point=$1,",
+        "    location_field=${5:None},",
+        "    min_distance=${6:None},",
+        "    max_distance=${7:5000},",
+        "    query=${8:None},",
+        "    create_index=${9|True,False|},",
+        ")",
+        "$0"
+            ],
+        "scope": "python",
+        "description": "Find samples within a max distance of a point"
+      },
+      "Geo Within": {
+        "prefix": "fo_geo_within",
+        "body": [
+            "${1:MANHATTAN} = [",
+            "    [",
+            "        $2[-73.949701, 40.834487],[-73.896611, 40.815076],[-73.998083, 40.696534],[-74.031751, 40.715273],[-73.949701, 40.834487]",
+            "    ]",
+            "]",
+            "${3:dataset}.geo_within(",
+            "    boundary=$1,",
+            "    location_field=${4:None},",
+            "    strict=${5|True,False|},  # default = True",
+            "    create_index=${6|True,False|}  # default = True",
+            ")"
+        ],
+        "scope": "python",
+        "description": "Find samples within a GeoJSON geometry"
+      }
+}

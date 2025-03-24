@@ -1,0 +1,273 @@
+// Apache-2.0 License 
+// Author: Burhan-Q
+// https://github.com/Burhan-Q
+
+{
+    "Create View": {
+        "prefix": "fo_create_view",
+        "body": [
+            "view = ${1:dataset}.view()",
+            "$0"
+        ],
+        "scope": "python",
+        "description": "Create a view into a FiftyOne dataset"
+    },
+
+    "Save View": {
+        "prefix": "fo_save_view",
+        "body": [
+            "${1:dataset}.save_view(",
+            "    name=\"$2\",",
+            "    view=$3,",
+            "    description=${4:None},",
+            "    color=\"${5:#ff6d05}\",  # RGB hex code",
+            "    overwrite=${6|False, True|}",
+            ")$0"
+        ],
+        "scope": "python",
+        "description": "Save a view to a FiftyOne dataset"
+    },
+
+    "Match Samples": {
+        "prefix": "fo_match",
+        "body": [
+            "view = ${1:dataset}.match(filter=$2)",
+            "$0"
+        ],
+        "scope": "python",
+        "description": "Create a view by matching samples"
+    },
+
+    "Match Frames": {
+        "prefix": "fo_match_frames",
+        "body": [
+            "view = ${1:dataset}.match_frames($2)",
+            "$0"
+        ],
+        "scope": "python",
+        "description": "Create a view by matching frames"
+    },
+
+    "Match Labels": {
+        "prefix": "fo_match_labels",
+        "body": [
+            "view = ${1:dataset}.match_labels(",
+            "    labels=${2:None},  # list of dict in the form of session.selected_labels",
+            "    ids=${3:None},  # an ID or iterable of IDs of the labels to select",
+            "    tags=${4:None},  # a tag or iterable of tags of labels to select",
+            "    filter=${5:None},  # filter to apply to the labels",
+            "    fields=${6:None},  # a field or iterable of fields from which to select",
+            "    bool=${7:None},  # match samples that have [None or True], or do not have [False], at least one label that matches",
+            ")$0"
+        ],
+        "scope": "python",
+        "description": "Create a view by matching labels"
+    },
+
+    "Match Tags": {
+        "prefix": "fo_match_tags",
+        "body": [
+            "view = ${1:dataset}.match_tags(",
+            "    tags=$2,  # the tag or iterable of tags to match",
+            "    bool=None  # match samples that have the tags [None or True], or do not have [False], the tags",
+            "    all=${3|False,True|}  match samples that have (or don't have) all [True] or any [False] of the tags",
+            ")$0"
+        ],
+        "scope": "python",
+        "description": "Create a view by matching tags"
+    },
+
+    "Filter Field": {
+        "prefix": "fo_filter_field",
+        "body": [
+            "view = ${1:dataset}.filter_field(",
+            "    field=\"${2:name}\",",
+            "    filter=$3,",
+            "    only_matches=${4|True,False|}",
+            ")$0"
+        ],
+        "scope": "python",
+        "description": "Create a view by filtering a field"
+    },
+
+    "Filter Labels": {
+        "prefix": "fo_filter_labels",
+        "body": [
+            "view = dataset.filter_labels(",
+            "    field=\"${1:label}\",",
+            "    filter=$2,",
+            "    only_matches=${3|True,False|},",
+            "    trajectories=${4|False,True|}",
+            ")$0"
+        ],
+        "scope": "python",
+        "description": "Create a view by filtering labels"
+    },
+
+    "Select Samples": {
+        "prefix": "fo_select",
+        "body": [
+            "view = dataset.select(sample_ids=${1:sample_ids}, ordered=${2|False,True|})",
+            "$0"
+        ],
+        "scope": "python",
+        "description": "Create a view by selecting samples"
+    },
+
+    "Select Labels": {
+        "prefix": "fo_select_labels",
+        "body": [
+            "view = dataset.select_labels(",
+            "    labels=\"${1:label_field}\",",
+            "    ids=${2:label_ids},",
+            "    tags=${3:None},",
+            "    fields=${4:None},",
+            "    omit_empty=${5|True,False|}",
+            ")$0"
+        ],
+        "scope": "python",
+        "description": "Create a view by selecting labels"
+    },
+
+        "Select Frames": {
+        "prefix": "fo_select_frames",
+        "body": [
+            "view = dataset.select_frames(frame_ids=${1:frame_numbers}, omit_empty=${2|True,False|})",
+            "$0"
+        ],
+        "scope": "python",
+        "description": "Create a view by selecting frames"
+    },
+
+    "Exclude Samples": {
+        "prefix": "fo_exclude",
+        "body": [
+            "view = dataset.exclude(sample_ids=${1:sample_ids})",
+            "$0"
+        ],
+        "scope": "python",
+        "description": "Create a view by excluding samples"
+    },
+
+    "Exclude Labels": {
+        "prefix": "fo_exclude_labels",
+        "body": [
+            "view = dataset.exclude_labels(",
+            "    labels=\"${1:label_field}\",",
+            "    ids=${2:label_ids}",
+            "    tags=${3:None},",
+            "    fields=${4:None},",
+            "    omit_empty=${5|True,False|}",
+            ")$0"
+        ],        
+        "scope": "python",
+        "description": "Create a view by excluding labels"
+    },
+
+    "Exclude Frames": {
+        "prefix": "fo_exclude_frames",
+        "body": [
+            "view = dataset.exclude_frames(frame_ids=${1:frame_numbers}, omit_empty=${2|True,False|})",
+            "$0"
+        ],
+        "scope": "python",
+        "description": "Create a view by excluding frames"
+    },
+
+    "Sort By": {
+        "prefix": "fo_sort_by",
+        "body": [
+            "view = dataset.sort_by(",
+            "    field_or_expr=$1,",
+            "    reverse=${2|False,True|},",
+            "    create_index=${3|True,False|}",
+            ")$0"
+        ],
+        "scope": "python",
+        "description": "Create a view by sorting samples"
+    },
+
+    "Limit": {
+        "prefix": "fo_limit",
+        "body": [
+            "view = dataset.limit(limit=${1:20})",
+            "$0"
+        ],
+        "scope": "python",
+        "description": "Create a view by limiting the number of samples"
+    },
+
+    "Shuffle": {
+        "prefix": "fo_shuffle",
+        "body": [
+            "view = dataset.shuffle(seed=${1:None})",
+            "$0"
+        ],
+        "scope": "python",
+        "description": "Create a view by shuffling the samples"
+    },
+
+    "Skip": {
+        "prefix": "fo_skip",
+        "body": [
+            "view = dataset.skip(${1:2})",
+            "$0"
+        ],
+        "scope": "python",
+        "description": "Create a view by skipping a number of samples"
+    },
+
+    "Take": {
+        "prefix": "fo_take",
+        "body": [
+            "view = dataset.take(size=${1:42}, seed=${2:None})",
+            "$0"
+        ],
+        "scope": "python",
+        "description": "Create a view by taking a number of samples"
+    },
+    
+    "To Patches": {
+    "prefix": "fo_to_patches",
+    "body": [
+        "patches_view = dataset.to_patches(field=\"$1\")",
+        "# returns fo.core.patches.PatchesView",
+        "$0"
+    ],
+    "scope": "python",
+    "description": "Create a view of image patches from a label field"
+    },
+
+    "To Evaluation Patches": {
+        "prefix": "fo_to_eval_patches",
+        "body": [
+            "eval_patches_view = dataset.to_evaluation_patches(eval_key=\"$1\")",
+            "# returns fo.core.patches.EvaluationPatchesView",
+            "$0"
+        ],
+        "scope": "python",
+        "description": "Create a view of evaluation patches"
+    },
+
+    "To Clips": {
+        "prefix": "fo_to_clips",
+        "body": [
+            "clips_view = dataset.to_clips(field_or_expr=$1)",
+            "# returns fo.core.clips.ClipsView",
+            "$0"
+        ],
+        "scope": "python",
+        "description": "Create a view of video clips"
+    },
+
+    "To Frames": {
+        "prefix": "fo_to_frames",
+        "body": [
+        "frames_view = dataset.to_frames()",
+        "# returns fo.core.video.FramesView",
+        "$0"
+        ],
+        "scope": "python",
+        "description": "Create a view of video frames"
+    }
+}

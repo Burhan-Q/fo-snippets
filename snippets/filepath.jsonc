@@ -1,0 +1,47 @@
+// Apache-2.0 License 
+// Author: Burhan-Q
+// https://github.com/Burhan-Q
+
+{
+    "Match Filepath Starts With": {
+        "prefix": "fo_match_filepath_starts_with",
+        "body": [
+            "${1:dataset}.match(filter=F(\"filepath\").starts_with(\"${3:/Users}\", case_sensitive=${4|True,False|}))",
+            "$0"
+        ],
+        "scope": "python",
+        "description": "Match samples where filepath starts with a string"
+        },
+      "Match Filepath Ends With": {
+        "prefix": "fo_match_filepath_ends_with",
+        "body": [
+            "${1:dataset}.match(filter=F(\"filepath\").ends_with(",
+            "    (\"${3:.jpg}\", \"${4:.png}\"), case_sensitive=${4|True,False|})",
+            ")",
+            "$0"
+        ],
+        "scope": "python",
+        "description": "Match samples where filepath ends with one of several strings"
+      },
+      "Filter Labels Contains String": {
+        "prefix": "fo_filter_labels_contains",
+        "body": [
+            "${1:dataset}.filter_labels(\"${2:predictions}\", F(\"label\").contains_str(",
+            "    \"$2\", case_sensitive=${4|True,False|})",
+            ")",
+            "$0"
+        ],
+        "scope": "python",
+        "description": "Filter labels where label contains a string"
+      },
+      "Match Filepath Regex": {
+        "prefix": "fo_match_filepath_regex",
+        "body": [
+            "${1:dataset}.match(filter=F(\"filepath\").re_match(\"${3:^image*.jpg}\", options=\"${4:None}\"))",
+            "$0# NOTE: Must be Perl compatible regex, see:",
+            "# https://docs.mongodb.com/manual/reference/operator/aggregation/regexMatch/#regexmatch-regex"
+        ],
+        "scope": "python",
+        "description": "Match samples where filepath matches a regular expression"
+        }
+}

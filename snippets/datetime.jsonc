@@ -1,0 +1,128 @@
+// Apache-2.0 License 
+// Author: Burhan-Q
+// https://github.com/Burhan-Q
+
+{
+    "Match Date After": {
+        "prefix": "fo_match_date_after",
+        "body": [
+            "# Default checks for samples from the last 5 days.",
+            "d = ${1:datetime.now()} - timedelta(${2:days=5})  # assumes from datetime import datetime, timedelta",
+            "${3:dataset}.match(filter=F(\"date\") > d)",
+            "$0"
+        ],
+        "scope": "python",
+        "description": "Match samples where date is after a given date"
+      },
+      "Match Date Within Delta": {
+        "prefix": "fo_match_date_within",
+        "body": [
+            "# Default checks for samples from last 30 days.",
+            "d = ${1:datetime.now()}  # assumes from datetime import datetime",
+            "tdelta = timedelta(${2:days=30})  # assumes from datetime import timedelta",
+            "${3:dataset}.match(filter=abs(F(\"date\") - d) < tdelta)",
+            "$0"
+        ],
+        "scope": "python",
+        "description": "Match samples where date is within a timedelta of a given date"
+      },
+      "Match Day Of Month": {
+        "prefix": "fo_match_day_of_month",
+        "body": [
+            "${1:dataset}.match(filter=F(\"date\").day_of_month() == ${2:24})",
+            "$0"
+        ],
+        "scope": "python",
+        "description": "Match samples where date is on a given day of the month"
+      },
+      "Match Day Of Week": {
+        "prefix": "fo_match_day_of_week",
+        "body": [
+            "# Default example filters by samples with even days of the week % 2",
+            "${1:dataset}.match(filter=F(\"date\").day_of_week() % ${2:2} == 0)",
+            "$0"
+        ],
+        "scope": "python",
+        "description": "Match samples where date is on a given day of the week"
+      },
+      "Match Day Of Year": {
+        "prefix": "fo_match_day_of_year",
+        "body": [
+            "${1:dataset}.match(filter=F(\"date\").day_of_year() == ${2:268})",
+            "$0"
+        ],
+        "scope": "python",
+        "description": "Match samples where date is on a given day of the year"
+      },
+      "Match Month": {
+        "prefix": "fo_match_month",
+        "body": [
+            "${1:dataset}.match(filter=F(\"date\").month() == ${2:9})",
+            "$0"
+        ],
+        "scope": "python",
+        "description": "Match samples where date is in a given month"
+      },
+      "Match Week": {
+        "prefix": "fo_match_week",
+        "body": [
+            "${1:dataset}.match(filter=F(\"date\").week() == ${2:38})",
+            "$0"
+        ],
+        "scope": "python",
+        "description": "Match samples where date is in a given week of the year"
+      },
+      "Match Year": { 
+        "prefix": "fo_match_year",
+        "body": [
+            "${1:dataset}.match(filter=F(\"date\").year() == ${2:2022})",
+            "$0"
+        ],
+        "scope": "python",
+        "description": "Match samples where date is in a given year"
+      },
+      "Match Minute Not Equal": {
+        "prefix": "fo_match_minute_not_equal",
+        "body": [
+            "${1:dataset}.match(filter=F(\"date\").minute() != ${2:0})",
+            "$0"
+        ],
+        "scope": "python",
+        "description": "Match samples where date minute is not equal to a value"
+      },
+      "Geo Near": {
+        "prefix": "fo_geo_near",
+        "body": [
+        "${1:TIMES_SQUARE} = [${2:-73.9855}, ${3:40.7580}]",
+        "${4:dataset}.geo_near(",
+        "    point=$1,",
+        "    location_field=${5:None},",
+        "    min_distance=${6:None},",
+        "    max_distance=${7:5000},",
+        "    query=${8:None},",
+        "    create_index=${9|True,False|},",
+        ")",
+        "$0"
+            ],
+        "scope": "python",
+        "description": "Find samples within a max distance of a point"
+      },
+      "Geo Within": {
+        "prefix": "fo_geo_within",
+        "body": [
+            "${1:MANHATTAN} = [",
+            "    [",
+            "        $2[-73.949701, 40.834487],[-73.896611, 40.815076],[-73.998083, 40.696534],[-74.031751, 40.715273],[-73.949701, 40.834487]",
+            "    ]",
+            "]",
+            "${3:dataset}.geo_within(",
+            "    boundary=$1,",
+            "    location_field=${4:None},",
+            "    strict=${5|True,False|},  # default = True",
+            "    create_index=${6|True,False|}  # default = True",
+            ")"
+        ],
+        "scope": "python",
+        "description": "Find samples within a GeoJSON geometry"
+      }
+}

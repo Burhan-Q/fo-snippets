@@ -1,0 +1,112 @@
+// Apache-2.0 License 
+// Author: Burhan-Q
+// https://github.com/Burhan-Q
+
+{
+    "Filter Labels Confidence": {
+        "prefix": "fo_filter_labels_confidence",
+        "body": [
+            "${1:dataset}.filter_labels(",
+            "    field=\"predictions\",",
+            "    filter=F(\"confidence\") > ${2:0.95},",
+            "    only_matches=${3|True,False|},  # default = True",
+            "    trajectories=${4|False,True|},  # default = False",
+            ")",
+            "$0"
+        ],
+        "scope": "python",
+        "description": "Filter labels by confidence"
+    },
+
+    "Match Detections Length": {
+        "prefix": "fo_match_detections_length",
+        "body": [
+            "${1:dataset}.match(filter=F(\"ground_truth.detections\").length() == ${2:10})",
+            "$0"
+        ],
+        "scope": "python",
+        "description": "Match samples by the number of detections"
+    },
+
+      "Match Contains Label": {
+        "prefix": "fo_match_contains_label",
+        "body": [
+            "${1:dataset}.match(filter=F(\"ground_truth.detections.label\").contains(\"${2:dog}\"))",
+            "$0"
+        ],
+        "scope": "python",
+        "description": "Match samples that contain a label"
+    },
+  
+    "Match Does Not Contain Label": {
+        "prefix": "fo_match_does_not_contain_label",
+        "body": [
+            "${1:dataset}.match(filter=~F(\"ground_truth.detections.label\").contains(\"${2:dog}\"))",
+            "$0"
+        ],
+        "scope": "python",
+        "description": "Match samples that do not contain a label"
+    },
+
+    "Filter Labels Only Label": {
+        "prefix": "fo_filter_labels_only_label",
+        "body": [
+            "${1:dataset}.filter_labels(",
+            "    field=\"${2:ground_truth}\",",
+            "    filter=F(\"label\") == \"${3:dog}\"",
+            "    only_matches=${5|True,False|},  # default = True",
+            "    trajectories=${6|False,True|},  # default = False",
+            ")",
+            "$0"
+        ],
+        "scope": "python",
+        "description": "Filter specific field that only include a specific label"
+    },
+
+    "Match Only Contains Label": {
+        "prefix": "fo_match_only_contains_label",
+        "body": [
+            "${1:dataset}.match(filter=F(\"ground_truth.detections.label\").is_subset([\"${2:dog}\"]))",
+            "$0"
+        ],
+        "scope": "python",
+        "description": "Match samples that only contain a specific label"
+    },
+
+    "Match Contains Either Label": {
+        "prefix": "fo_match_contains_either_label",
+        "body": [
+            "${1:dataset}.match(filter=F(\"predictions.detections.label\").contains(",
+            "    [\"${2:cat}\",\"${3:dog}\"], all=${4|False,True|})",
+            ")",
+            "$0"
+        ],
+        "scope": "python",
+        "description": "Match samples that contain either of a list of labels"
+    },
+
+    "Match Contains All Labels": {
+        "prefix": "fo_match_contains_all_labels",
+        "body": [
+            "${1:dataset}.match(filter=F(\"predictions.detections.label\").contains(",
+            "    [\"${2:cat}\", \"${3:dog}\"], all=${4|False,True|})",
+            ")",
+            "$0"
+        ],
+        "scope": "python",
+        "description": "Match samples that contain all labels in a list"
+    },
+
+    "Match Contains One Label But Not Both": {
+        "prefix": "fo_match_xor",
+        "body": [
+            "field = \"predictions.detections.label\"",
+            "one_expr = F(field).contains([\"${1:cat}\", \"${2:dog}\"])",
+            "both_expr = F(field).contains([\"${1:cat}\", \"${2:dog}\"], all=${3|False,True|})",
+            "${1:dataset}.match(filter=one_expr & ~both_expr)",
+            "$0"
+        ],
+        "scope": "python",
+        "description": "Match samples that contain one label but not both"
+    }
+}

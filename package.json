@@ -1,0 +1,54 @@
+{
+	"name": "fiftyone-snippets",
+	"displayName": "FiftyOne Snippets",
+	"description": "Snippets to use with the Voxel51 FiftyOne Python library.",
+	"version": "0.1.0",
+	"publisher": "Burhan-Q",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Burhan-Q/fo-snippets.git"
+    },
+    "license": "Apache-2.0",
+    "icon": "images/voxel51-logo.png",
+    "author": {
+        "name": "Burhan Qaddoumi"
+    },
+    "galleryBanner": {
+        "color": "#ff6d04",
+        "theme": "dark"
+    },
+	"engines": {
+		"vscode": "^1.28.0"
+	},
+	"categories": [
+		"Snippets", "Machine Learning", "Data Science", "AI", "Other"
+	],
+    "keywords": [
+        "fiftyone", "snippets", "python", "machine learning", "ai", "voxel51", "computer vision", "object detection", "curation", "data"
+    ],
+	"contributes": {
+		"snippets": [
+			{
+				"language": "python",
+				"path": "./snippets/datetime.jsonc"
+			},
+            {
+                "language": "python",
+                "path": "./snippets/filepath.jsonc"
+            },
+            {
+                "language": "python",
+                "path": "./snippets/geo.jsonc"
+            },
+            {
+                "language": "python",
+                "path": "./snippets/labels.jsonc"
+            },
+            {
+                "language": "python",
+                "path": "./snippets/views.jsonc"
+            }
+		],
+    "qna": false
+	}
+}
