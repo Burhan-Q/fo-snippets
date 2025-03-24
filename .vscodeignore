@@ -1,6 +1,7 @@
 # Git files
 .git/
 .github/
+.gitignore
 
 # VS Code
 *.code-workspace
@@ -8,6 +9,7 @@
 
 # VS Code extension
 *.vsix
+.vscodeignore
 
 # Model Weights
 weights/
@@ -29,4 +31,23 @@ weights/
 pnnx*
 
 # Media files
-image.png
+images.png
+
+# Private files
+.env
+
+# Virtual environments
+.venv
+
+# Python files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+pyproject.toml
+*.py
+uv.lock
+.python-version
+
