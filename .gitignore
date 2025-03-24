@@ -9,6 +9,8 @@ wheels/
 # Virtual environments
 .venv
 
+# Private
+.env
 
 # VS Code
 .snippets
